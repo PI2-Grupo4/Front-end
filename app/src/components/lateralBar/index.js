@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Logo, LogoContainer } from "./styles";
-import logo from "../../assets/Logo.svg";
+import logo from "../../assets/logo.svg";
 
 function LateralBar() {
   return (

@@ -2,7 +2,9 @@ import { Grid } from "@mui/material";
 import React from "react";
 import LateralBar from "../../components/lateralBar";
 import StatusButtonAgua from "../../components/statusButtonAgua";
-import StatusButton from "../../components/statusButtonAgua";
+import StatusButtonBattery from "../../components/statusButtonBattery";
+import StatusButtonConection from "../../components/statusButtonConection";
+
 import {
   Container,
   ContainerCentral,
@@ -23,8 +25,8 @@ function Dashboard() {
         <ContainerCentral>
           <ContainerStatus>
             <StatusButtonAgua porcentagem="100%" />
-            <StatusButtonAgua type="conection" />
-            <StatusButtonAgua type="Battery" />
+            <StatusButtonConection type="Conection" />
+            <StatusButtonBattery porcentagem="100%" />
           </ContainerStatus>
         </ContainerCentral>
       </ContainerDash>
