@@ -11,6 +11,7 @@ import {
   ContainerDash,
   Titulo,
   ContainerTitulo,
+  ContainerStatusCard,
   ContainerStatus,
 } from "./styles";
 
@@ -24,9 +25,12 @@ function Dashboard() {
         </ContainerTitulo>
         <ContainerCentral>
           <ContainerStatus>
-            <StatusButtonAgua porcentagem="100%" />
-            <StatusButtonConection type="Conection" />
-            <StatusButtonBattery porcentagem="100%" />
+            <Titulo>Status</Titulo>
+            <ContainerStatusCard>
+              <StatusButtonAgua porcentagem="100%" />
+              <StatusButtonConection type="Conection" />
+              <StatusButtonBattery porcentagem="100%" />
+            </ContainerStatusCard>
           </ContainerStatus>
         </ContainerCentral>
       </ContainerDash>

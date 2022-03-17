@@ -24,11 +24,16 @@ export const ContainerCentral = styled.div`
   max-height: 90%;
 `;
 
-export const ContainerStatus = styled.div`
+export const ContainerStatusCard = styled.div`
   background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+`;
+export const ContainerStatus = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Titulo = styled.div`

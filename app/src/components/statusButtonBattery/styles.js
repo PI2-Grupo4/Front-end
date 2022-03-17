@@ -11,8 +11,9 @@ export const Container = styled.div`
 export const IconeContainer = styled.div`
   width: 40%;
   height: 100%;
+  text-align: center;
+  align-content: center;
 `;
-
 export const DadosContainer = styled.div`
   width: 60%;
   text-align: center;

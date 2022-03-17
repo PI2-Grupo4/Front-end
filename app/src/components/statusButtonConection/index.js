@@ -1,5 +1,10 @@
 import React from "react";
-import { Container, DadosContainer, Icone, IconeContainer } from "./styles";
+import {
+  Container,
+  DadosContainer,
+  Icone,
+  IconeContainer,
+} from "../statusButtonAgua/styles";
 import logoAgua from "../../assets/conection-logo.svg";
 
 function StatusButtonConexao() {

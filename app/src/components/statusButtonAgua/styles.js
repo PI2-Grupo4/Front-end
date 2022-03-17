@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #0159b4;
-  width: 15rem;
-  height: 10rem;
+  width: 300px;
+  height: 150px;
   display: flex;
   flex-direction: row;
-`;
-
-export const IconeContainer = styled.div`
-  width: 40%;
-  height: 100%;
+  padding-left: 10px;
+  text-align: center;
+  align-items: center;
+  color: #ffffff;
 `;
 
 export const DadosContainer = styled.div`
@@ -24,6 +23,12 @@ export const DadosContainer = styled.div`
   }
 `;
 
+export const IconeContainer = styled.div`
+  width: 40%;
+  height: 100%;
+  text-align: center;
+  align-content: center;
+`;
 export const Icone = styled.img`
   width: 100%;
   height: 100%;
