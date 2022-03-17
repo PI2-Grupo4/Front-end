@@ -1,11 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import Dashboard from './screens/dashboard';
+import logo from "./logo.svg";
+import "./App.css";
+import Dashboard from "./screens/dashboard";
 
 function App() {
-  return (
-    <Dashboard/>
-  );
+  return <Dashboard />;
 }
 
 export default App;

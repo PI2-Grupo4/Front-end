@@ -1,11 +1,15 @@
+import { Grid } from "@mui/material";
 import React from "react";
 import LateralBar from "../../components/lateralBar";
+import StatusButtonAgua from "../../components/statusButtonAgua";
+import StatusButton from "../../components/statusButtonAgua";
 import {
   Container,
   ContainerCentral,
   ContainerDash,
   Titulo,
   ContainerTitulo,
+  ContainerStatus,
 } from "./styles";
 
 function Dashboard() {
@@ -16,7 +20,13 @@ function Dashboard() {
         <ContainerTitulo>
           <Titulo> Dashboard </Titulo>
         </ContainerTitulo>
-        <ContainerCentral>Status, Robo, Controle</ContainerCentral>
+        <ContainerCentral>
+          <ContainerStatus>
+            <StatusButtonAgua porcentagem="100%" />
+            <StatusButtonAgua type="conection" />
+            <StatusButtonAgua type="Battery" />
+          </ContainerStatus>
+        </ContainerCentral>
       </ContainerDash>
     </Container>
   );

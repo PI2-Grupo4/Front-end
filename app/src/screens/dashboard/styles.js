@@ -1,4 +1,3 @@
-import styledComponents from "styled-components";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -18,11 +17,18 @@ export const ContainerTitulo = styled.div`
 `;
 
 export const ContainerCentral = styled.div`
-  background-color: white;
+  background-color: yellow;
   max-width: 90%;
   min-width: 80vw;
   min-height: 80vh;
   max-height: 90%;
+`;
+
+export const ContainerStatus = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 export const Titulo = styled.div`
