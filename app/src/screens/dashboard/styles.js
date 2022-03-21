@@ -17,25 +17,52 @@ export const ContainerTitulo = styled.div`
 `;
 
 export const ContainerCentral = styled.div`
-  background-color: yellow;
-  max-width: 90%;
-  min-width: 80vw;
-  min-height: 80vh;
-  max-height: 90%;
+  background-color: #f0f2f5;
 `;
 
 export const ContainerStatusCard = styled.div`
-  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding: 10px;
 `;
 export const ContainerStatus = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+  height: 210px;
+  width: 960px;
 `;
 
 export const Titulo = styled.div`
   font-size: 32px;
+`;
+
+export const ContainerRobo = styled.div`
+  background-color: #ffffff;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 326px;
+  padding: 10px;
+`;
+
+export const ContainerSeparacao = styled.div`
+  background-color: #f0f2f5;
+  height: 12px;
+`;
+
+export const ContainerControle = styled.div`
+  background-color: white;
+  width: 550px;
+  height: 400px;
+  margin-top: 10px;
+  margin-left: 44px;
+  padding: 10px;
+`;
+
+export const ContainerInferior = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
