@@ -36,6 +36,7 @@ export const ContainerStatus = styled.div`
 
 export const Titulo = styled.div`
   font-size: 32px;
+  text-align: left;
 `;
 
 export const ContainerRobo = styled.div`
@@ -56,13 +57,25 @@ export const ContainerSeparacao = styled.div`
 export const ContainerControle = styled.div`
   background-color: white;
   width: 550px;
-  height: 400px;
+  height: 420px;
   margin-top: 10px;
   margin-left: 44px;
-  padding: 10px;
+  padding: 0 10px;
+  justify-content: center;
 `;
 
 export const ContainerInferior = styled.div`
   display: flex;
   flex-direction: row;
+`;
+export const ContainerControleInterno = styled.div`
+  background-color: #f0f2f5;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LinhaControle = styled.div`
+  background-color: white;
+  height: 24px;
 `;

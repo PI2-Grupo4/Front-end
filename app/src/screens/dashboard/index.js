@@ -1,4 +1,5 @@
 import React from "react";
+import Direcao from "../../components/direcao";
 import LateralBar from "../../components/lateralBar";
 import StatusButtonAgua from "../../components/statusButtonAgua";
 import StatusButtonBattery from "../../components/statusButtonBattery";
@@ -17,7 +18,10 @@ import {
   ContainerSeparacao,
   ContainerControle,
   ContainerInferior,
+  ContainerControleInterno,
+  LinhaControle,
 } from "./styles";
+import Velocidade from "../../components/velocidade";
 
 function Dashboard() {
   return (
@@ -44,6 +48,11 @@ function Dashboard() {
             </ContainerRobo>
             <ContainerControle>
               <Titulo>Controle</Titulo>
+              <ContainerControleInterno>
+                <Direcao />
+                <LinhaControle />
+                <Velocidade />
+              </ContainerControleInterno>
             </ContainerControle>
           </ContainerInferior>
         </ContainerCentral>
