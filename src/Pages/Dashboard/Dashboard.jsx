@@ -12,6 +12,7 @@ import SecondaryTitle from "../../shared/SecondaryTitle";
 
 import "./Dashboard.css";
 const Dashboard = () => {
+  //to-do: Realizar conexão destes dados com o backend
   const statusData = [
     {
       title: "Water",
