@@ -3,7 +3,7 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 
 import battery from "../../assets/images/battery.png";
 
-const Battery = () => {
+const Battery = ({ status }) => {
   return (
     <>
       <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
@@ -47,7 +47,7 @@ const Battery = () => {
                 color: "#FFFFFF",
               }}
             >
-              100%
+              {status.value}
             </Typography>
           </Box>
         </Paper>
