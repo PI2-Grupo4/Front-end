@@ -14,7 +14,7 @@ const Robot = () => {
             height: "27rem",
           }}
         >
-          <SecondaryTitle title={"Robot"} />
+          <SecondaryTitle title={"Robô"} />
           {/* Message Box */}
           <Box
             sx={{
@@ -41,7 +41,7 @@ const Robot = () => {
                   fontWeight: "bold",
                 }}
               >
-                Message
+                Menssagem
               </Typography>
             </Box>
           </Box>

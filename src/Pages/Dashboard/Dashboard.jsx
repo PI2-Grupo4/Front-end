@@ -15,15 +15,15 @@ const Dashboard = () => {
   //to-do: Realizar conexão destes dados com o backend
   const statusData = [
     {
-      title: "Water",
+      title: "Água",
       value: "100%",
     },
     {
-      title: "Connection",
+      title: "Conexão",
       value: "Connected",
     },
     {
-      title: "Battery",
+      title: "Bateria",
       value: "100%",
     },
   ];
@@ -111,7 +111,7 @@ const Dashboard = () => {
                     height: "27rem",
                   }}
                 >
-                  <SecondaryTitle title={"Control"} />
+                  <SecondaryTitle title={"Controles"} />
                   <Control />
                   <Speed />
                 </Paper>

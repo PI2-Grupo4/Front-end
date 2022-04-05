@@ -33,7 +33,7 @@ const Battery = ({ status }) => {
                 color: "#FFFFFF",
               }}
             >
-              Battery
+              Bateria
             </Typography>
             <Typography
               sx={{

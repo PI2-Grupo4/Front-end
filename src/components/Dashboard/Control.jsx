@@ -54,7 +54,7 @@ const Control = () => {
             fontSize: "1.3rem",
           }}
         >
-          Direction
+          Direção
         </Typography>
         <Box
           sx={{

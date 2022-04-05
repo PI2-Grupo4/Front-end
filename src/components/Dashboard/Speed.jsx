@@ -79,7 +79,7 @@ const Speed = () => {
             fontSize: "1.3rem",
           }}
         >
-          Speed
+          Velocidade
         </Typography>
         <Box sx={{ m: 3 }} />
         <Typography
@@ -93,7 +93,7 @@ const Speed = () => {
           }}
         >
           <Box>
-            <span>Low</span>
+            <span>Baixo</span>
             <div className="verticalDevider"></div>
           </Box>
           <Box
@@ -103,11 +103,11 @@ const Speed = () => {
               flexDirection: "column",
             }}
           >
-            <span>Medium</span>
+            <span>Medio</span>
             <div className="verticalDeviderMiddle"></div>
           </Box>
           <Box>
-            <span>High</span>
+            <span>Alto</span>
             <div className="verticalDeviderRight"></div>
           </Box>
         </Typography>
