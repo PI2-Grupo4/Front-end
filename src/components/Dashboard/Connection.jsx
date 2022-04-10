@@ -3,7 +3,7 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 
 import wifi from "../../assets/images/wifi.png";
 import sign from "../../assets/images/sign.png";
-import cacel from "../../assets/images/Vector.svg";
+import cacel from "../../assets/images/cancel.svg";
 
 const Connection = ({ status }) => {
   return (

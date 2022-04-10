@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import React from "react";
 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 
 const Sidebar = () => {
   return (
