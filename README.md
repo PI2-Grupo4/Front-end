@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="[/src/logo.svg](https://raw.githubusercontent.com/PI2-Grupo4/Front-end/main/src/logo.svg)" alt="logo" width="400px">
+  <img src="https://github.com/PI2-Grupo4/Front-end/blob/main/src/assets/images/logo.png" alt="logo" width="400px">
 </div>
 
 <h1 align="center">Limpador de Placas Fotovoltaicas - Solar Clean </h1>
