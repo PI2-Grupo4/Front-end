@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </a>
 <a href="https://open.vscode.dev/PI2-Grupo4/Front-end">
-  <img src="https://open.vscode.dev/badges/open-in-vscode.svg">
+  <img src="https://vscode.dev/github/badges/open-in-vscode.svg">
 </a>
 <a href="https://nodejs.org/en/blog/release/v14.18.1/">
   <img src="https://img.shields.io/badge/node-14.18.1-brightgreen.svg">
