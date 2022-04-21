@@ -5,6 +5,7 @@ import { Tooltip, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
+import { changeSpeed } from "../../Services/service";
 
 function ValueLabelComponent(props) {
   const { children, value } = props;
@@ -64,7 +65,7 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const Speed = () => {
+const Speed = (props) => {
   return (
     <>
       <Box
@@ -114,9 +115,11 @@ const Speed = () => {
         <PrettoSlider
           valueLabelDisplay="auto"
           aria-label="pretto slider"
-          defaultValue={100}
-          step={50}
-          onChange={(e, value) => console.log(value)}
+          min={1}
+          max={3}
+          defaultValue={props.equipmentSpeed}
+          step={1}
+          onChange={(e, value) => changeSpeed(value)}
         />
       </Box>
     </>

@@ -1,83 +1,77 @@
-import axios from "axios"
+import axios from "axios";
 
 export const baseURL = axios.create({
-  baseURL: `link/api`
-})
+  baseURL: `http://localhost:8080/api/`,
+});
 
 export async function getInfo() {
   try {
-    const response = await baseURL.get(`/equipmentInfo`)
-    return response
+    const response = await baseURL.get(`equipmentInfo?id=${2}`);
+    console.log("GetInfo", response.data);
+    return response.data;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
 // 0 esquerda
 // 1 direita
-export async function goLeft() {
+export async function changeDirection(direction) {
   try {
-    const response = await baseURL.post(`/changeDirection`, 0)
-    return response
+    const response = await baseURL.put(`/changeDirection`, {
+      id: 2,
+      direction: direction,
+    });
+    console.log("Direção", response.data);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
 export async function goRight() {
   try {
-    const response = await baseURL.post(`/changeDirection`, 1)
-    return response
+    const response = await baseURL.put(`/changeDirection`, 1);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
 //1 = low
 //2 = medium
 //3 = high
-export async function lowSpeed() {
+export async function changeSpeed(speed) {
   try {
-    const response = await baseURL.post(`/changeSpeed`, 1)
-    return response
+    const response = await baseURL.put(`/changeSpeed`, {
+      id: 2,
+      speed: speed,
+    });
+    console.log(response.data);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
-export async function mediumSpeed() {
+export async function power(power) {
   try {
-    const response = await baseURL.post(`/changeSpeed`, 2)
-    return response
+    const response = await baseURL.put(`/power`, {
+      id: 2,
+      status: power,
+    });
+    console.log(response.data);
+    return response;
   } catch (error) {
-    return error
-  }
-}
-export async function highSpeed() {
-  try {
-    const response = await baseURL.post(`/changeSpeed`, 3)
-    return response
-  } catch (error) {
-    return error
-  }
-}
-
-
-export async function turnOn() {
-  try {
-    const response = await baseURL.post(`/power`, true)
-    return response
-  } catch (error) {
-    return error
+    return error;
   }
 }
 
 export async function turnOff() {
   try {
-    const response = await baseURL.post(`/power`, false)
-    return response
+    const response = await baseURL.post(`/power`, false);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
 }
-
