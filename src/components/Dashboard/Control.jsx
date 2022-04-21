@@ -9,12 +9,12 @@ import rightArrow from "../../assets/images/arrowRight.png";
 import leftArrowActive from "../../assets/images/arrowLeftActive.png";
 import playActiveLogo from "../../assets/images/powerBtnActive.png";
 import rightArrowActive from "../../assets/images/arrowRightActive.png";
-import { changeDirection, changeSpeed, power } from "../../Services/service";
+import { changeDirection, power } from "../../Services/service";
 
 const Control = (props) => {
-  const [leftActive, setLeftActive] = React.useState(false);
+  const [leftActive, setLeftActive] = React.useState(!props.direction);
   const [playActive, setPlayActive] = React.useState(props.power);
-  const [rightActive, setRightActive] = React.useState(false);
+  const [rightActive, setRightActive] = React.useState(props.direction);
 
   const handleActive = (active) => {
     if (active === "left") {

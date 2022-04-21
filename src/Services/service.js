@@ -4,10 +4,22 @@ export const baseURL = axios.create({
   baseURL: `http://localhost:8080/api/`,
 });
 
+export async function getEquipments() {
+  try {
+    const response = await baseURL.get(`equipments`);
+    console.log("Todos", response.data);
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function getInfo() {
   try {
     const response = await baseURL.get(`equipmentInfo?id=${2}`);
     console.log("GetInfo", response.data);
+    getEquipments();
     return response.data;
   } catch (error) {
     return error;
@@ -58,7 +70,7 @@ export async function power(power) {
   try {
     const response = await baseURL.put(`/power`, {
       id: 2,
-      status: power,
+      isOn: power,
     });
     console.log(response.data);
     return response;
