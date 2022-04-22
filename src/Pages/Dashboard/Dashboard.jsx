@@ -1,6 +1,13 @@
-import { Grid, Paper } from "@mui/material";
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+} from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Battery from "../../components/Dashboard/Battery";
 import Connection from "../../components/Dashboard/Connection";
 import Control from "../../components/Dashboard/Control";
@@ -9,21 +16,39 @@ import Robot from "../../components/Dashboard/Robot";
 import Sidebar from "../../components/Dashboard/Sidebar";
 import Speed from "../../components/Dashboard/Speed";
 import Water from "../../components/Dashboard/Water";
-import { getInfo } from "../../Services/service";
+import MyContext from "../../contexts/MyContext";
+import { getEquipments, getInfo } from "../../Services/service";
 import SecondaryTitle from "../../shared/SecondaryTitle";
 
 import "./Dashboard.css";
 const Dashboard = () => {
-  const [equipment, setEquipment] = useState(null);
+  const { equipmentsLists, setEquipmentsLists } = useContext(MyContext);
 
-  const fetchEquipment = async () => {
-    let equipment = await getInfo();
+  const [equipmentsList, setEquipmentsList] = useState(null);
+  const [equipment, setEquipment] = useState(null);
+  const [equipmentId, setEquipmentId] = useState(null);
+
+  const fetchEquipment = async (equipmentId) => {
+    let equipment = await getInfo(equipmentId);
     setEquipment(equipment);
   };
 
+  const fetchEquipmentsList = async () => {
+    let equipments = await getEquipments();
+    setEquipmentsList(equipments);
+    setEquipmentsLists(equipments);
+  };
+
+  const handleSelect = (event) => {
+    console.log("Select --- ", event.target.value);
+    setEquipmentId(event.target.value);
+  };
+
   useEffect(() => {
-    fetchEquipment();
-  }, []);
+    fetchEquipmentsList();
+    fetchEquipment(equipmentId);
+    console.log("oooooooo", equipmentsLists);
+  }, [equipmentId]);
 
   //to-do: Realizar conexão destes dados com o backend
 
@@ -49,6 +74,22 @@ const Dashboard = () => {
               paddingY: "2rem",
             }}
           >
+            {equipmentsList ? (
+              <FormControl fullWidth>
+                <InputLabel>Equipamento</InputLabel>
+                <Select
+                  value={equipmentId}
+                  label="Equipamento"
+                  onChange={(event) => handleSelect(event)}
+                >
+                  {equipmentsList.map((id) => (
+                    <MenuItem value={id.id}>Equipamento {id.id}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              <h1>Carregando</h1>
+            )}
             {/* Title */}
             <DashboardTitle />
             {/* Status */}
@@ -84,19 +125,23 @@ const Dashboard = () => {
                   <Water
                     status={{
                       title: "Água",
-                      value: `${equipment.waterLevel}%`,
+                      value: equipment.waterLevel
+                        ? `${equipment.waterLevel}%`
+                        : `-`,
                     }}
                   />
                   <Connection
                     status={{
                       title: "Conexão",
-                      value: "Connected",
+                      value: equipment.batteryLevel ? `Connected` : `-`,
                     }}
                   />
                   <Battery
                     status={{
                       title: "Bateria",
-                      value: `${equipment.batteryLevel}%`,
+                      value: equipment.batteryLevel
+                        ? `${equipment.batteryLevel}%`
+                        : `-`,
                     }}
                     onClick={getInfo}
                   />
@@ -117,30 +162,39 @@ const Dashboard = () => {
                 marginTop: "1rem",
               }}
             >
-              <Grid container spacing={4}>
-                <Robot />
-                <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      padding: "1rem",
-                      height: "27rem",
-                    }}
-                  >
-                    <SecondaryTitle title={"Controles"} />
-                    <Control
-                      power={equipment.status}
-                      direction={equipment.direction}
-                    />
-                    <Speed equipmentSpeed={equipment.speed} />
-                  </Paper>
+              <>
+                <Grid container spacing={4}>
+                  <Robot id={equipmentId} status={equipment.status} />
+                  <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        padding: "1rem",
+                        height: "27rem",
+                      }}
+                    >
+                      <SecondaryTitle title={"Controles"} />
+                      <Control
+                        status={equipment.status}
+                        direction={equipment.direction}
+                        id={equipmentId}
+                      />
+
+                      <Speed
+                        equipmentSpeed={equipment.speed}
+                        id={equipmentId}
+                      />
+                    </Paper>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </>
             </Box>
           </Box>
         </Box>
       ) : (
-        <></>
+        <>
+          <h1>Carregando</h1>
+        </>
       )}
     </main>
   );

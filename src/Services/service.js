@@ -6,7 +6,7 @@ export const baseURL = axios.create({
 
 export async function getEquipments() {
   try {
-    const response = await baseURL.get(`equipments`);
+    const response = await baseURL.get(`listEquipments?id=${1}`);
     console.log("Todos", response.data);
 
     return response.data;
@@ -15,9 +15,9 @@ export async function getEquipments() {
   }
 }
 
-export async function getInfo() {
+export async function getInfo(id) {
   try {
-    const response = await baseURL.get(`equipmentInfo?id=${2}`);
+    const response = await baseURL.get(`equipmentInfo?id=${id}`);
     console.log("GetInfo", response.data);
     getEquipments();
     return response.data;
@@ -28,10 +28,10 @@ export async function getInfo() {
 
 // 0 esquerda
 // 1 direita
-export async function changeDirection(direction) {
+export async function changeDirection(direction, id) {
   try {
     const response = await baseURL.put(`/changeDirection`, {
-      id: 2,
+      id: id,
       direction: direction,
     });
     console.log("Direção", response.data);
@@ -53,10 +53,10 @@ export async function goRight() {
 //1 = low
 //2 = medium
 //3 = high
-export async function changeSpeed(speed) {
+export async function changeSpeed(speed, id) {
   try {
     const response = await baseURL.put(`/changeSpeed`, {
-      id: 2,
+      id: id,
       speed: speed,
     });
     console.log(response.data);
@@ -66,11 +66,14 @@ export async function changeSpeed(speed) {
   }
 }
 
-export async function power(power) {
+// 1 ligado
+// 2 limpando
+// 3 standby
+export async function status(status, id) {
   try {
     const response = await baseURL.put(`/power`, {
-      id: 2,
-      isOn: power,
+      id: id,
+      status: status,
     });
     console.log(response.data);
     return response;

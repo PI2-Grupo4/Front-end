@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Tooltip, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
@@ -66,62 +66,77 @@ const PrettoSlider = styled(Slider)({
 });
 
 const Speed = (props) => {
+  const [equipmentId, setEquipmentId] = useState(props.id);
+
+  useEffect(() => {
+    setEquipmentId(props.id);
+    console.log("ID ------------------", props.id);
+  }, [props.id]);
+
   return (
     <>
-      <Box
-        sx={{
-          backgroundColor: "#F0F2F5",
-          padding: "1rem",
-          mt: "1rem",
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: "1.3rem",
-          }}
-        >
-          Velocidade
-        </Typography>
-        <Box sx={{ m: 3 }} />
-        <Typography
-          gutterBottom
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "1.1rem",
-            marginBottom: "0",
-          }}
-        >
-          <Box>
-            <span>Baixo</span>
-            <div className="verticalDevider"></div>
-          </Box>
+      {props.id ? (
+        <>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
+              backgroundColor: "#F0F2F5",
+              padding: "1rem",
+              mt: "1rem",
             }}
           >
-            <span>Medio</span>
-            <div className="verticalDeviderMiddle"></div>
+            <Typography
+              sx={{
+                fontSize: "1.3rem",
+              }}
+            >
+              Velocidade
+            </Typography>
+            <Box sx={{ m: 3 }} />
+            <Typography
+              gutterBottom
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontSize: "1.1rem",
+                marginBottom: "0",
+              }}
+            >
+              <Box>
+                <span>Baixo</span>
+                <div className="verticalDevider"></div>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <span>Medio</span>
+                <div className="verticalDeviderMiddle"></div>
+              </Box>
+              <Box>
+                <span>Alto</span>
+                <div className="verticalDeviderRight"></div>
+              </Box>
+            </Typography>
+
+            <PrettoSlider
+              valueLabelDisplay="auto"
+              aria-label="pretto slider"
+              min={1}
+              max={3}
+              // onChangeCommitted={(e, value) => changeSpeed(value, props.id)}
+              defaultValue={props.equipmentSpeed}
+              step={1}
+              onChange={(e, value) => changeSpeed(value, props.id)}
+            />
           </Box>
-          <Box>
-            <span>Alto</span>
-            <div className="verticalDeviderRight"></div>
-          </Box>
-        </Typography>
-        <PrettoSlider
-          valueLabelDisplay="auto"
-          aria-label="pretto slider"
-          min={1}
-          max={3}
-          defaultValue={props.equipmentSpeed}
-          step={1}
-          onChange={(e, value) => changeSpeed(value)}
-        />
-      </Box>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
