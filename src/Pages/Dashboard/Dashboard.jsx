@@ -21,15 +21,21 @@ import { getInfo } from "../../Services/service";
 import SecondaryTitle from "../../shared/SecondaryTitle";
 
 import "./Dashboard.css";
-const Dashboard = ({ equipments, equipment, speed }) => {
+const Dashboard = ({ equipments, equipment, speed, storeSetState }) => {
   const [equipmentId, setEquipmentId] = useState("");
 
   const handleSelect = async (event) => {
     setEquipmentId(event.target.value);
   };
 
+  const fetchEquipment = async () => {
+    const chosenEquipment = await getInfo(equipmentId);
+    storeSetState({ equipment: chosenEquipment });
+  };
+
   useEffect(() => {
-    equipment = getInfo(equipmentId);
+    fetchEquipment();
+    console.log("Equipamento", equipment);
   }, [equipmentId]);
 
   //to-do: Realizar conexão destes dados com o backend
@@ -56,7 +62,7 @@ const Dashboard = ({ equipments, equipment, speed }) => {
               paddingY: "2rem",
             }}
           >
-            {equipments ? (
+            {equipments.length > 0 ? (
               <FormControl fullWidth>
                 <InputLabel>Equipamento</InputLabel>
                 <Select
@@ -64,8 +70,10 @@ const Dashboard = ({ equipments, equipment, speed }) => {
                   label="Equipamento"
                   onChange={(event) => handleSelect(event)}
                 >
-                  {equipments.map((id) => (
-                    <MenuItem value={id.id}>Equipamento {id.id}</MenuItem>
+                  {equipments.map((equipment) => (
+                    <MenuItem value={equipment.id}>
+                      Equipamento {equipment.id}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -125,7 +133,6 @@ const Dashboard = ({ equipments, equipment, speed }) => {
                         ? `${equipment.batteryLevel}%`
                         : `-`,
                     }}
-                    onClick={getInfo}
                   />
                 </Grid>
               </Paper>

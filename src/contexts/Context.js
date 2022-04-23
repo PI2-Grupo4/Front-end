@@ -9,6 +9,7 @@ export class Provider extends React.Component {
     equipments: [],
     equipment: {},
     speed: "",
+    equipmentId: "",
   };
 
   stateHandler = (state) => {
