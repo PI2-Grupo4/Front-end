@@ -16,45 +16,27 @@ import Robot from "../../components/Dashboard/Robot";
 import Sidebar from "../../components/Dashboard/Sidebar";
 import Speed from "../../components/Dashboard/Speed";
 import Water from "../../components/Dashboard/Water";
-import MyContext from "../../contexts/MyContext";
-import { getEquipments, getInfo } from "../../Services/service";
+import { connectWithStore } from "../../contexts/Context";
+import { getInfo } from "../../Services/service";
 import SecondaryTitle from "../../shared/SecondaryTitle";
 
 import "./Dashboard.css";
-const Dashboard = () => {
-  const { equipmentsLists, setEquipmentsLists } = useContext(MyContext);
+const Dashboard = ({ equipments, equipment, speed }) => {
+  const [equipmentId, setEquipmentId] = useState("");
 
-  const [equipmentsList, setEquipmentsList] = useState(null);
-  const [equipment, setEquipment] = useState(null);
-  const [equipmentId, setEquipmentId] = useState(null);
-
-  const fetchEquipment = async (equipmentId) => {
-    let equipment = await getInfo(equipmentId);
-    setEquipment(equipment);
-  };
-
-  const fetchEquipmentsList = async () => {
-    let equipments = await getEquipments();
-    setEquipmentsList(equipments);
-    setEquipmentsLists(equipments);
-  };
-
-  const handleSelect = (event) => {
-    console.log("Select --- ", event.target.value);
+  const handleSelect = async (event) => {
     setEquipmentId(event.target.value);
   };
 
   useEffect(() => {
-    fetchEquipmentsList();
-    fetchEquipment(equipmentId);
-    console.log("oooooooo", equipmentsLists);
+    equipment = getInfo(equipmentId);
   }, [equipmentId]);
 
   //to-do: Realizar conexão destes dados com o backend
 
   return (
     <main className="dashboardContainer">
-      {equipment ? (
+      {equipments.length > 0 ? (
         <Box
           sx={{
             display: "flex",
@@ -74,7 +56,7 @@ const Dashboard = () => {
               paddingY: "2rem",
             }}
           >
-            {equipmentsList ? (
+            {equipments ? (
               <FormControl fullWidth>
                 <InputLabel>Equipamento</InputLabel>
                 <Select
@@ -82,7 +64,7 @@ const Dashboard = () => {
                   label="Equipamento"
                   onChange={(event) => handleSelect(event)}
                 >
-                  {equipmentsList.map((id) => (
+                  {equipments.map((id) => (
                     <MenuItem value={id.id}>Equipamento {id.id}</MenuItem>
                   ))}
                 </Select>
@@ -200,4 +182,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default connectWithStore(Dashboard);

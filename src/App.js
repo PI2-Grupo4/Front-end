@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import MyContext from "./contexts/MyContext";
+import Timer from "./components/Dashboard/Timer";
+import { connectWithStore, Provider } from "./contexts/Context";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import { getEquipments } from "./Services/service";
 
 function App() {
-  const [equipmentsLists, setEquipmentsLists] = React.useState(null);
-
   return (
     <>
-      <MyContext.Provider value={{ equipmentsLists, setEquipmentsLists }}>
-        <Dashboard />
-      </MyContext.Provider>
+      <Provider>
+        <Timer>
+          <Dashboard />
+        </Timer>
+      </Provider>
     </>
   );
 }
 
-export default App;
+export default connectWithStore(App);

@@ -7,8 +7,6 @@ export const baseURL = axios.create({
 export async function getEquipments() {
   try {
     const response = await baseURL.get(`listEquipments?id=${1}`);
-    console.log("Todos", response.data);
-
     return response.data;
   } catch (error) {
     return error;
@@ -19,7 +17,6 @@ export async function getInfo(id) {
   try {
     const response = await baseURL.get(`equipmentInfo?id=${id}`);
     console.log("GetInfo", response.data);
-    getEquipments();
     return response.data;
   } catch (error) {
     return error;
