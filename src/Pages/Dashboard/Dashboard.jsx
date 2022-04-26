@@ -35,7 +35,6 @@ const Dashboard = ({ equipments, equipment, speed, storeSetState }) => {
 
   useEffect(() => {
     fetchEquipment();
-    console.log("Equipamento", equipment);
   }, [equipmentId]);
 
   //to-do: Realizar conexão destes dados com o backend
@@ -153,28 +152,34 @@ const Dashboard = ({ equipments, equipment, speed, storeSetState }) => {
             >
               <>
                 <Grid container spacing={4}>
-                  <Robot id={equipmentId} status={equipment.status} />
-                  <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
-                    <Paper
-                      elevation={0}
-                      sx={{
-                        padding: "1rem",
-                        height: "27rem",
-                      }}
-                    >
-                      <SecondaryTitle title={"Controles"} />
-                      <Control
+                  {equipmentId ? (
+                    <>
+                      <Robot
+                        id={equipmentId}
                         status={equipment.status}
-                        direction={equipment.direction}
-                        id={equipmentId}
+                        active={true}
                       />
+                      <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+                        <Paper
+                          elevation={0}
+                          sx={{
+                            padding: "1rem",
+                            height: "27rem",
+                          }}
+                        >
+                          <SecondaryTitle title={"Controles"} />
 
-                      <Speed
-                        equipmentSpeed={equipment.speed}
-                        id={equipmentId}
-                      />
-                    </Paper>
-                  </Grid>
+                          <Control id={equipmentId} />
+
+                          <Speed id={equipmentId} />
+                        </Paper>
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Robot id={equipmentId} status={equipment.status} />
+                    </>
+                  )}
                 </Grid>
               </>
             </Box>
