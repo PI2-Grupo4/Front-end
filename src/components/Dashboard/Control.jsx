@@ -10,26 +10,27 @@ import leftArrowActive from "../../assets/images/arrowLeftActive.png";
 import playActiveLogo from "../../assets/images/powerBtnActive.png";
 import rightArrowActive from "../../assets/images/arrowRightActive.png";
 import { changeDirection, status } from "../../Services/service";
+import { connectWithStore } from "../../contexts/Context";
 
-const Control = (props) => {
-  const [leftActive, setLeftActive] = React.useState(!props.direction);
-  const [playActive, setPlayActive] = React.useState(props.power);
-  const [rightActive, setRightActive] = React.useState(props.direction);
-  const [statuss, setStatuss] = React.useState(props.status);
+const Control = ({ id, equipments, equipment, equipStatus, storeSetState }) => {
+  const [leftActive, setLeftActive] = React.useState(!equipment.direction);
+  const [playActive, setPlayActive] = React.useState(equipment.status);
+  const [rightActive, setRightActive] = React.useState(equipment.direction);
 
   const handleActive = (active) => {
     if (active === "left") {
-      changeDirection(false, props.id);
+      changeDirection(false, equipment.id);
       setLeftActive(true);
       setRightActive(false);
     }
     if (active === "play") {
       setPlayActive(!playActive);
-      console.log("asdfasdfa", !playActive ? 2 : 3, props.status);
-      status(!playActive ? 2 : 3, props.id);
+      storeSetState({ equipStatus: !playActive });
+      console.log(playActive);
+      status(!playActive, equipment.id);
     }
     if (active === "right") {
-      changeDirection(true, props.id);
+      changeDirection(true, equipment.id);
       setLeftActive(false);
       setRightActive(true);
     }
@@ -48,8 +49,18 @@ const Control = (props) => {
   };
 
   useEffect(() => {
-    setStatuss(props.statuss);
-  }, [playActive, statuss]);
+    setEquipmentData(id);
+  }, [id]);
+
+  const setEquipmentData = (id) => {
+    const selectedEquipment = equipments.find((equip) => equip.id === id);
+    // 1 ligado
+    // 2 limpando
+    // 3 standby
+    setLeftActive(selectedEquipment.direction === false);
+    setRightActive(selectedEquipment.direction === true);
+    setPlayActive(selectedEquipment.status === 2);
+  };
 
   return (
     <>
@@ -101,4 +112,4 @@ const Control = (props) => {
   );
 };
 
-export default Control;
+export default connectWithStore(Control);

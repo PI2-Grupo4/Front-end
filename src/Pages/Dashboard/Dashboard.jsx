@@ -16,45 +16,32 @@ import Robot from "../../components/Dashboard/Robot";
 import Sidebar from "../../components/Dashboard/Sidebar";
 import Speed from "../../components/Dashboard/Speed";
 import Water from "../../components/Dashboard/Water";
-import MyContext from "../../contexts/MyContext";
-import { getEquipments, getInfo } from "../../Services/service";
+import { connectWithStore } from "../../contexts/Context";
+import { getInfo } from "../../Services/service";
 import SecondaryTitle from "../../shared/SecondaryTitle";
 
 import "./Dashboard.css";
-const Dashboard = () => {
-  const { equipmentsLists, setEquipmentsLists } = useContext(MyContext);
+const Dashboard = ({ equipments, equipment, speed, storeSetState }) => {
+  const [equipmentId, setEquipmentId] = useState("");
 
-  const [equipmentsList, setEquipmentsList] = useState(null);
-  const [equipment, setEquipment] = useState(null);
-  const [equipmentId, setEquipmentId] = useState(null);
-
-  const fetchEquipment = async (equipmentId) => {
-    let equipment = await getInfo(equipmentId);
-    setEquipment(equipment);
-  };
-
-  const fetchEquipmentsList = async () => {
-    let equipments = await getEquipments();
-    setEquipmentsList(equipments);
-    setEquipmentsLists(equipments);
-  };
-
-  const handleSelect = (event) => {
-    console.log("Select --- ", event.target.value);
+  const handleSelect = async (event) => {
     setEquipmentId(event.target.value);
   };
 
+  const fetchEquipment = async () => {
+    const chosenEquipment = await getInfo(equipmentId);
+    storeSetState({ equipment: chosenEquipment });
+  };
+
   useEffect(() => {
-    fetchEquipmentsList();
-    fetchEquipment(equipmentId);
-    console.log("oooooooo", equipmentsLists);
+    fetchEquipment();
   }, [equipmentId]);
 
   //to-do: Realizar conexão destes dados com o backend
 
   return (
     <main className="dashboardContainer">
-      {equipment ? (
+      {equipments.length > 0 ? (
         <Box
           sx={{
             display: "flex",
@@ -74,7 +61,7 @@ const Dashboard = () => {
               paddingY: "2rem",
             }}
           >
-            {equipmentsList ? (
+            {equipments.length > 0 ? (
               <FormControl fullWidth>
                 <InputLabel>Equipamento</InputLabel>
                 <Select
@@ -82,8 +69,10 @@ const Dashboard = () => {
                   label="Equipamento"
                   onChange={(event) => handleSelect(event)}
                 >
-                  {equipmentsList.map((id) => (
-                    <MenuItem value={id.id}>Equipamento {id.id}</MenuItem>
+                  {equipments.map((equipment) => (
+                    <MenuItem value={equipment.id}>
+                      Equipamento {equipment.id}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -143,7 +132,6 @@ const Dashboard = () => {
                         ? `${equipment.batteryLevel}%`
                         : `-`,
                     }}
-                    onClick={getInfo}
                   />
                 </Grid>
               </Paper>
@@ -164,28 +152,34 @@ const Dashboard = () => {
             >
               <>
                 <Grid container spacing={4}>
-                  <Robot id={equipmentId} status={equipment.status} />
-                  <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
-                    <Paper
-                      elevation={0}
-                      sx={{
-                        padding: "1rem",
-                        height: "27rem",
-                      }}
-                    >
-                      <SecondaryTitle title={"Controles"} />
-                      <Control
+                  {equipmentId ? (
+                    <>
+                      <Robot
+                        id={equipmentId}
                         status={equipment.status}
-                        direction={equipment.direction}
-                        id={equipmentId}
+                        active={true}
                       />
+                      <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+                        <Paper
+                          elevation={0}
+                          sx={{
+                            padding: "1rem",
+                            height: "27rem",
+                          }}
+                        >
+                          <SecondaryTitle title={"Controles"} />
 
-                      <Speed
-                        equipmentSpeed={equipment.speed}
-                        id={equipmentId}
-                      />
-                    </Paper>
-                  </Grid>
+                          <Control id={equipmentId} />
+
+                          <Speed id={equipmentId} />
+                        </Paper>
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Robot id={equipmentId} status={equipment.status} />
+                    </>
+                  )}
                 </Grid>
               </>
             </Box>
@@ -200,4 +194,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default connectWithStore(Dashboard);

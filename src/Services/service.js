@@ -1,14 +1,12 @@
 import axios from "axios";
 
 export const baseURL = axios.create({
-  baseURL: `http://localhost:8080/api/`,
+  baseURL: `http://localhost:8080/api`,
 });
 
 export async function getEquipments() {
   try {
-    const response = await baseURL.get(`listEquipments?id=${1}`);
-    console.log("Todos", response.data);
-
+    const response = await baseURL.get(`/listEquipments?id=${1}`);
     return response.data;
   } catch (error) {
     return error;
@@ -17,9 +15,8 @@ export async function getEquipments() {
 
 export async function getInfo(id) {
   try {
-    const response = await baseURL.get(`equipmentInfo?id=${id}`);
+    const response = await baseURL.get(`/equipmentInfo?id=${id}`);
     console.log("GetInfo", response.data);
-    getEquipments();
     return response.data;
   } catch (error) {
     return error;
@@ -73,7 +70,7 @@ export async function status(status, id) {
   try {
     const response = await baseURL.put(`/power`, {
       id: id,
-      status: status,
+      status: status ? 2 : 3,
     });
     console.log(response.data);
     return response;

@@ -1,13 +1,15 @@
 import { Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { connectWithStore } from "../../contexts/Context";
 import SecondaryTitle from "../../shared/SecondaryTitle";
 
-const Robot = (props) => {
+const Robot = ({ id, equipments, equipment, active, equipStatus }) => {
   const [message, setMessage] = useState("Desconectado");
-  const [status, setStatus] = useState(props.status);
+  const [status, setStatus] = useState(equipment.status);
 
   const handleMessage = async (status) => {
+    console.log("Status", status);
     if (status === 1) {
       setMessage("Equipamento\nLigado");
     } else if (status === 2) {
@@ -19,10 +21,20 @@ const Robot = (props) => {
     }
   };
 
+  const setEquipmentData = useCallback(
+    (id) => {
+      const selectedEquipment = equipments.find((equip) => equip.id === id);
+      handleMessage(selectedEquipment.status);
+      setStatus(selectedEquipment.status);
+    },
+    [equipments]
+  );
+
   useEffect(() => {
-    handleMessage(props.status);
-    setStatus(props.status);
-  }, [props.status]);
+    if (active) {
+      setEquipmentData(id);
+    }
+  }, [id, message, equipStatus]);
 
   return (
     <>
@@ -59,9 +71,11 @@ const Robot = (props) => {
                 sx={{
                   fontSize: "2rem",
                   fontWeight: "bold",
+                  whiteSpace: "pre-line",
+                  textAlign: "center",
                 }}
               >
-                {status ? message : <p>Desconectado</p>}
+                {status ? message : `Robô${"\n"}Desconectado`}
               </Typography>
             </Box>
           </Box>
@@ -71,4 +85,4 @@ const Robot = (props) => {
   );
 };
 
-export default Robot;
+export default connectWithStore(Robot);

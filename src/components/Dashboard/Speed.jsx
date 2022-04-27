@@ -6,6 +6,7 @@ import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { changeSpeed } from "../../Services/service";
+import { connectWithStore } from "../../contexts/Context";
 
 function ValueLabelComponent(props) {
   const { children, value } = props;
@@ -65,17 +66,16 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const Speed = (props) => {
-  const [equipmentId, setEquipmentId] = useState(props.id);
+const Speed = ({ id, equipments, equipment, storeSetState }) => {
+  const [equipmentId, setEquipmentId] = useState(equipment.id);
 
   useEffect(() => {
-    setEquipmentId(props.id);
-    console.log("ID ------------------", props.id);
-  }, [props.id]);
+    console.log("ID ------------------", id);
+  }, [id]);
 
   return (
     <>
-      {props.id ? (
+      {equipment.id ? (
         <>
           <Box
             sx={{
@@ -127,10 +127,10 @@ const Speed = (props) => {
               aria-label="pretto slider"
               min={1}
               max={3}
-              // onChangeCommitted={(e, value) => changeSpeed(value, props.id)}
-              defaultValue={props.equipmentSpeed}
+              // onChangeCommitted={(e, value) => changeSpeed(value, equipment.id)}
+              value={equipments.find((equip) => equip.id === id).speed}
               step={1}
-              onChange={(e, value) => changeSpeed(value, props.id)}
+              onChange={(e, value) => changeSpeed(value, equipment.id)}
             />
           </Box>
         </>
@@ -141,4 +141,4 @@ const Speed = (props) => {
   );
 };
 
-export default Speed;
+export default connectWithStore(Speed);
