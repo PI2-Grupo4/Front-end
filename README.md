@@ -21,10 +21,12 @@ O objetivo geral deste projeto de software é desenvolver uma aplicação web pa
 
 ## Como contribuir?
 
-Gostaria de contribuir com nosso projeto? Acesse o nosso [guia de contribuição]() onde são explicados todos os passos.
+Gostaria de contribuir com nosso projeto? Acesse o nosso [guia de contribuição](https://github.com/PI2-Grupo4/Front-end/blob/main/CONTRIBUTING.md) onde são explicados todos os passos.
 Caso reste duvidas você também pode entrar em contato conosco criando uma issue.
 
 ## Documentação
+
+Para acessar nossa documentação [clique aqui](https://github.com/PI2-Grupo4/Docs#readme).
 
 ## Como rodar?
 
